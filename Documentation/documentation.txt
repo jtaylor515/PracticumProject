@@ -1,0 +1,4 @@
+2019 StockX Data: https://www.kaggle.com/datasets/hudsonstuck/stockx-data-contest
+Major Brands Prices Data: https://www.kaggle.com/datasets/rkiattisak/shoe-prices-dataset
+Nike Only Price Data: https://www.kaggle.com/datasets/ulrikthygepedersen/nike-shoes-sales
+Other data pulled by scraping StockX Shoe Data
