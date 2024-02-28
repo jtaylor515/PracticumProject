@@ -1,9 +1,8 @@
 Data
-2019 StockX Data: https://www.kaggle.com/datasets/hudsonstuck/stockx-data-contest
-Major Brands Prices Data: https://www.kaggle.com/datasets/rkiattisak/shoe-prices-dataset
-Nike Only Price Data: https://www.kaggle.com/datasets/ulrikthygepedersen/nike-shoes-sales
-Other data pulled by scraping StockX Shoe Data
+https://www.yelp.com/dataset/documentation/main
+
+Data Pipeline
+Download JSON Data --> Migrate to SQL Schema or Store in Cloud as JSON --> Query with JSON query or SQL
 
 Background Research and Previous Work
-https://www.sciencedirect.com/science/article/pii/S1877050921000430?ref=pdf_download&fr=RR-2&rr=85a0a5833b7e4538
-https://medium.com/swlh/predicting-stockx-sneaker-prices-with-machine-learning-ec9cb625bec0
+
