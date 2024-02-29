@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+# Data
+yelp_dataset/
+yelp_photos/
+
 # Distribution / packaging
 .Python
 build/
