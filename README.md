@@ -1,6 +1,6 @@
-# SneakerX
+# Munch
 
-Welcome to SneakerX - your go-to destination for sneaker data visualization, price predictions, and personalized AI chatbot assistance. Whether you're a seasoned sneakerhead or just starting out, SneakerX offers a revolutionary web application experience tailored specifically for sneaker enthusiasts.
+Welcome to Munch - your go-to destination for smart, conversational restaurant searching! Whether you're gluten free or just want to find the best burger in town, Munch will be your new foodie friend.
 
 ## About Envitas
 
@@ -14,19 +14,17 @@ Envitas is a dynamic project group passionate about bringing innovation to the s
 
 ## Elevator Pitch
 
-SneakerX is a revolutionary Web Application that allows sneaker enthusiasts to visualize sneaker data and price predictions like never before. With the help of our own customly developed ML sneaker price prediction model, we allow sneakerheads to get reliable future valuation insights for any specific sneaker.
-
-Additionally, users will also have access to an LLM powered personalized AI chatbot that can answer any question related to sneakers or price trends, as it will have access to all of our data and insights. That, coupled with our intuitive minimalistic data visualization UI will ensure users can also visualize all the current data and trends for any given sneaker.
+Munch is a revolutionary iOS app that will make searching for a bite to eat easy and enjoyable. With the help of our LLM-powered AI chatbot, you won't have to endlessly scroll through reviews, websites, or the musings of local guides to find the perfect restaurant that fits your needs. Simply tell Munch what you're looking for, and it will provide relevant options near you with a friendly, conversational tone. Munch will save you from stress and hassle, so you can focus on what matters most: good food and good times.
 
 ## Features
 
-- **Price Prediction Model**: Utilize our custom ML model to gain insights into future sneaker valuations.
-- **Interactive AI Chatbot**: Get personalized assistance and answers to your sneaker-related queries with our LLM-powered chatbot.
-- **Data Visualization**: Visualize current sneaker data and trends through an intuitive and minimalistic UI.
+- **Interactive AI Chatbot**: Get personalized assistance in your search for a meal with our LLM-powered chatbot.
+- **Advice based on relevant reviews**: Munch will do the hard work so you don't have to. Answers are powered by real reviews! Munch filters out the noise, so you can trust you're getting good information.
+- **Transparent information**: Ultimately, you still have a decision ahead, but Munch will   
 
 ## Getting Started
 
-To get started with SneakerX, simply visit our website and create an account. Once logged in, you'll have access to all of our features, including the price prediction model and the AI chatbot.
+To get started with Munch, simply download our app and create an account. Once logged in, you'll have access to all of our AI helper and all the restaurant data we have available.
 
 ## Contributing
 
@@ -36,9 +34,9 @@ We welcome contributions from the community! If you have ideas for improvements 
 
 If you have any questions or feedback, don't hesitate to reach out to us:
 
-- Email: [contact@sneakerx.com](mailto:contact@sneakerx.com)
-- Twitter: [@sneakerx](https://twitter.com/sneakerx)
-- Instagram: [@sneakerx_official](https://instagram.com/sneakerx_official)
+- Email: [contact@MunchAI.com](mailto:contact@MunchAI.com)
+- Twitter: [@MunchAI](https://twitter.com/MunchAI)
+- Instagram: [@Munch_Official](https://instagram.com/Munch_official)
 
 ## License
 
