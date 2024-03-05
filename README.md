@@ -20,7 +20,7 @@ Munch is a revolutionary iOS app that will make searching for a bite to eat easy
 
 - **Interactive AI Chatbot**: Get personalized assistance in your search for a meal with our LLM-powered chatbot.
 - **Advice based on relevant reviews**: Munch will do the hard work so you don't have to. Answers are powered by real reviews! Munch filters out the noise, so you can trust you're getting good information.
-- **Transparent information**: Ultimately, you still have a decision ahead, but Munch will   
+- **Transparent information**: Ultimately, you still have a decision ahead, so Munch will provide users with overall ratings, location, and any other available restaurant characteristics.  
 
 ## Getting Started
 
