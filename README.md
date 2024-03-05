@@ -2,6 +2,8 @@
 
 Welcome to Munch - your go-to destination for smart, conversational restaurant searching! Whether you're gluten free or just want to find the best burger in town, Munch will be your new foodie friend.
 
+<img src="Presentations/Munch.png" width="150" height="150">
+
 ## About Envitas
 
 Envitas is a dynamic project group passionate about bringing innovation to the sneaker community. Our team consists of:
