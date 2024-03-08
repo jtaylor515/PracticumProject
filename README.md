@@ -6,7 +6,7 @@ Welcome to Munch - your go-to destination for smart, conversational restaurant s
 
 ## About Envitas
 
-Envitas is a dynamic project group passionate about bringing innovation to the sneaker community. Our team consists of:
+Envitas is a dynamic project group passionate about bringing innovation to the food lovers community. Our team consists of:
 
 - Jeffrey Taylor
 - Topher Roebuck
