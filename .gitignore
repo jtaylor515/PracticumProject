@@ -7,8 +7,15 @@ __pycache__/
 *.so
 
 # Data
-yelp_dataset/
-yelp_photos/
+*/yelp_dataset/
+*/yelp_photos/
+*.tar
+
+# EC2 Key Pair
+*.pem
+
+# PDF
+*.pdf
 
 # Distribution / packaging
 .Python
