@@ -297,164 +297,6 @@ input::placeholder {
     transform-style: preserve-3d;
 }
 
-#doc1{
-    z-index: 95;
-}
-#doc2{
-    z-index: 95;
-}
-#doc3{
-    z-index: 95;
-}
-
-/* -------circle-1----------- */
-#circle1{
-    width: 12%;
-    top: 40px;
-    left: 30px;
-}
-
-#circle1 img{
-    width: 100%;
-}
-
-/* -------circle-2------------- */
-
-#circle2{
-    width: 8%;
-    top: -50px;
-    left: 0;
-}
-#circle2 img{
-    width: 100%;
-}
-
-/* -------circle-3------------- */
-
-#circle3{
-    width: 6%;
-    top: -80px;
-    left: 100px;
-}
-
-#circle3 img{
-    width: 100%;
-}
-
-/* -------circle-4------------- */
-
-#circle4{
-    width: 25%;
-    top: -50px;
-    right: 30px;
-}
-
-#circle4 img{
-    width: 100%;
-}
-
-/* -------circle-5------------- */
-
-#circle5{
-    width: 12%;
-    top: -100px;
-    right: 30px;
-}
-
-#circle5 img{
-    width: 100%;
-}
-
-/* -------circle-6------------- */
-
-#circle6{
-    width: 8%;
-    top: -150px;
-    right: 150px;
-}
-
-#circle6 img{
-    width: 100%;
-}
-
-/* -------circle-7------------- */
-
-#circle7{
-    width: 20%;
-    bottom: -150px;
-    right: 150px;
-    z-index: 96;
-}
-
-#circle7 img{
-    width: 100%;
-}
-
-/* -------circle-8------------- */
-
-#circle8{
-    width: 8%;
-    bottom: -20px;
-    right: 350px;
-    z-index: 98;
-}
-
-#circle8 img{
-    width: 100%;
-}
-
-/* -------circle-9------------- */
-
-#circle9{
-    width: 7%;
-    bottom: -90px;
-    right: 150px;
-    z-index: 96;
-}
-
-#circle9 img{
-    width: 100%;
-}
-
-/* -----------features page------------------ */
-
-.main-features-box{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    grid-gap: 1.875rem;
-}
-.feature-box{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: column nowrap;
-}
-.featues-icon{
-    background-color: #fdfdfd;
-    border-radius: 20px;
-    padding: 1.5rem;
-    margin-bottom: 1rem ;
-    box-shadow: 0 25px 50px -10px rgb(100 44 0 / 7%);
-    position: relative;
-}
-.featues-icon i{
-    font-size: 2.5rem;
-    color: var(--hov);
-
-}
-.feat-head h2{
-    font-size: 1.3rem;
-    text-align: center;
-    margin-bottom: .75rem;
-}
-.feat-p p{
-    font-size: var(--pfont);
-    text-align: center;
-    line-height: 2rem;
-    font-weight: 200;
-}
-
 
 /* ------------------section-full--------------------- */
 /* .section-full{
@@ -522,70 +364,6 @@ input::placeholder {
     position: absolute;
 }
 
-/* ------------circle-10--------------- */
-#circle10{
-    width: 14%;
-    top: 90%;
-    left: 60%;
-}
-#circle10 img{
-    width: 100%;
-}
-
-/* ------------circle-11--------------- */
-#circle11{
-    width: 14%;
-    bottom: 40%;
-    left: 90%;
-}
-#circle11 img{
-    width: 100%;
-}
-
-/* ------------circle-12--------------- */
-#circle12{
-    width: 14%;
-    top: 50%;
-    left: 40%;
-}
-#circle12 img{
-    width: 100%;
-}
-
-
-
-/* ------------------work-section------------ */
-.work-section{
-    padding: 5rem 0;
-}
-
-.work-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    align-items: center;
-    grid-column-gap: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-.work-content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: column wrap;
-}
-.work-content h1{
-    font-size: var(--headfont);
-    margin-bottom: 3rem;
-}
-.work-not{
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    padding: 0.25rem .75rem;
-    background-color: var(--hov);
-    border-radius: 50%;
-}
 
 /* -------------section-idea------------ */
 
@@ -611,48 +389,7 @@ input::placeholder {
     border-radius: 50%;
 }
 
-/* ------------section-review-------------- */
-
-.section-review{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    grid-column-gap: 2rem;
-}
-
-.review{
-    background-color: var(--bgdiff);
-    border-radius: 24px;
-    padding: 30px 40px 35px;
-    display: flex;
-    align-items: center;
-    flex-flow: column nowrap;
-    margin-bottom: 2rem;
-}
-
-.review p{
-    font-size: var(--pfont);
-    line-height: 2rem;
-    margin-bottom: 2rem;
-}
-.lower-review-section{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.user-log{
-    padding: 1rem;
-    border-radius: 50%;
-    background-color: #fdfdfd;
-    margin-right: 1rem;
-}
-.review-name{
-    font-size: 1rem;
-    font-weight: 700;
-}
-
 /* ---------footer------------- */
-
 
 .section-footer{
     width: 100%;
@@ -693,7 +430,7 @@ input::placeholder {
 /* ----------------animation--------------- */
 
 
-.animate-circle.slide-top.rotategrid{
+.animate.slide-top.rotategrid{
     animation: rotategrid 4s ease-in-out both;
     -webkit-animation: rotategrid 4s ease-in-out both;
     
@@ -760,8 +497,8 @@ input::placeholder {
 }
 
 
-/* -------------circles-animation-slide-top--------------- */
-.animate-circle.slide-top{
+/* -------------animation-slide-top--------------- */
+.animate.slide-top{
     -webkit-animation: slide-top 6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: slide-top 6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
@@ -791,9 +528,9 @@ input::placeholder {
 
 
 
-/* -------------circles-animation-slide-right-------------- */
+/* -------------animation-slide-right-------------- */
 
-.animate-circle.slide-right{
+.animate.slide-right{
     -webkit-animation: slide-right 6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: slide-right 6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
@@ -819,9 +556,9 @@ input::placeholder {
     }
 }
 
-/* -------------circles-animation-slide-left-------------- */
+/* -------------animation-slide-left-------------- */
 
-.animate-circle.slide-back{
+.animate.slide-back{
     -webkit-animation: slide-back 6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	animation: slide-back 6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
@@ -847,9 +584,9 @@ input::placeholder {
     }
 }
 
-/* -------------circles-animation-slide-back--------------- */
+/* -------------animation-slide-back--------------- */
 
-.animate-circle.slide-left {
+.animate.slide-left {
 	-webkit-animation: slide-left 6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	animation: slide-left 6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
@@ -874,17 +611,6 @@ input::placeholder {
         transform: translateX(-100px);
     }
 }
-
-
-/* ----------animate-circle--------------- */
-
-.circle{
-    transition: 6s;
-}
-
-
-
-
 
 /* -------------------- for tablet------------------- */
 
