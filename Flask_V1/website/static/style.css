@@ -3,6 +3,132 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/* Restaurant card container */
+.restaurant-card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px; /* Space between cards */
+    overflow: hidden;
+  }
+  
+  /* Image container */
+  .restaurant-card .card-image {
+    width: 100%;
+    height: 200px; /* Fixed height for images */
+    background-position: center;
+    background-size: cover;
+  }
+  
+  /* Info container */
+  .restaurant-card .card-info {
+    padding: 16px;
+  }
+  
+  /* Restaurant name */
+  .restaurant-card .card-info .name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  /* Additional details */
+  .restaurant-card .card-info .details {
+    font-size: 14px;
+    color: #666666;
+  }
+  
+  /* Flex container for aligning rating and review count */
+  .restaurant-card .card-info .rating-review {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Style for review count */
+  .restaurant-card .card-info .rating-review .review-count {
+    font-size: 12px;
+    color: #999999;
+  }
+  
+
+/* Add these styles to your CSS file */
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .search-bar {
+    padding: 10px;
+    border: none;
+    width: calc(100% - 120px); /* Take the width minus the button width */
+    border-radius: 20px 0 0 20px; /* Rounded corners on the left side */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .search-btn {
+    padding: 10px 20px;
+    background-color: #FF6F61; /* Aesthetic peach color */
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 20px 20px 0; /* Rounded corners on the right side */
+    transition: background-color 0.3s ease;
+    width: 100px; /* Fixed width for the button */
+  }
+  
+  .search-btn:hover {
+    background-color: #e65a50; /* Darken the color on hover */
+  }
+  
+  .results {
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px;
+    /* ...other styles... */
+  }
+  
+  /* To ensure the search bar expands downwards for large text */
+  .search-bar {
+    overflow: hidden;
+    resize: vertical;
+    min-height: 38px; /* Minimum height to match the button */
+  }
+  
+  .diff-bold {
+    color: #FF6F61; /* Same peach color for consistency */
+    /* ...other styles... */
+  }
+
+  /* Position the search bar and button side by side */
+.search-container {
+    display: flex;
+  }
+  
+  /* Style the search bar */
+  #search-input {
+    flex-grow: 1; /* Makes the search bar take up the available space */
+    margin-right: 8px; /* Adds spacing between the search bar and the button */
+    border-radius: 4px 0 0 4px; /* Rounded corners on the left side only */
+  }
+  
+  /* Style the search button */
+  #search-button {
+    border-radius: 0 4px 4px 0; /* Rounded corners on the right side only */
+  }
+  
+  /* Allow the results container to handle more content gracefully */
+  .results {
+    max-height: 400px; /* Set a maximum height */
+    overflow-y: auto; /* Add a scrollbar if content overflows */
+  }
+
+  
 body{
     background-color: #fdf8f4;
     font-family:  'DM Sans', sans-serif;

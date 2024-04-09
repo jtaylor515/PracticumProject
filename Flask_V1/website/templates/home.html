@@ -1,5 +1,6 @@
-{% extends "base.html" %} {% block head %} {% endblock %} {% block title %}Home
-Page{% endblock %} {% block content %}
+{% extends "base.html" %} {% block head %}
+<!-- Adjust the path above according to where you place the searchRestaurants.js file -->
+{% endblock %} {% block title %}Home Page{% endblock %} {% block content %}
 <div class="d-flex flex-column align-items-center mt-5">
   <section class="section-hero container">
     <div class="content maxsize">
@@ -8,12 +9,24 @@ Page{% endblock %} {% block content %}
           Find the best restaurant <span class="diff-bold">for you.</span>
         </h1>
         <p>Stop scrolling through reviews. Use Munch instead.</p>
-        <input
-          class="search-bar"
-          type="text"
-          placeholder="Ask about restaurants."
-        />
+        <div class="search-container">
+          <input
+            id="search-input"
+            class="search-bar"
+            type="text"
+            placeholder="Ask about restaurants."
+          />
+          <button
+            id="search-button"
+            class="search-btn"
+            onclick="searchRestaurants()"
+          >
+            Search
+          </button>
+        </div>
       </div>
+      <div id="results-container" class="results"></div>
+      <br />
       <div class="prompts">
         <div class="prompt-container">
           <p>
@@ -34,4 +47,4 @@ Page{% endblock %} {% block content %}
     </div>
   </section>
 </div>
-{% endblock %}s
+{% endblock %}

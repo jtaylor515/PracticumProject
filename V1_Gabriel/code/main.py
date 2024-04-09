@@ -1,23 +1,27 @@
+import os
 import time
 from dotenv import load_dotenv
-import os
-import pandas as pd
-from llama_index.core.query_engine import PandasQueryEngine
+from llama_index.llms.openai import OpenAI
+from llama_index.core import SQLDatabase
+from llama_index.core.query_engine import NLSQLTableQueryEngine
 from llama_index.core.tools import QueryEngineTool, ToolMetadata
 from llama_index.core.agent import ReActAgent
-from llama_index.llms.openai import OpenAI
+from sqlalchemy import create_engine
 from prompt import create_restaurant_prompt
 
 def main():
     load_dotenv()
     os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
-    # Load the CSV data
-    csv_path = os.path.join("../data/atlanta", "yelp_atl_restaurants.csv")
-    restaurant_df = pd.read_csv(csv_path)
+    # Connect to the PostgreSQL server
+    conn_string = "postgresql://bot:envitas123@envitas-db.cj44ees44tpz.us-east-1.rds.amazonaws.com/postgres"
+    engine = create_engine(conn_string)
 
-    # Create a PandasQueryEngine
-    restaurant_query_engine = PandasQueryEngine(df=restaurant_df, verbose=True)
+    # Create a SQLDatabase object
+    sql_database = SQLDatabase(engine, schema="yelp", include_tables=["raw_business"])
+
+    # Create an NLSQLTableQueryEngine
+    restaurant_query_engine = NLSQLTableQueryEngine(sql_database=sql_database, llm=OpenAI(), verbose=True)
     restaurant_prompt = create_restaurant_prompt()
     restaurant_query_engine.update_prompts({"pandas_prompt": restaurant_prompt})
 
@@ -31,7 +35,7 @@ def main():
     )
 
     # Create an agent
-    llm = OpenAI(model="gpt-3.5-turbo")
+    llm = OpenAI(model="gpt-4-turbo-preview")
     agent = ReActAgent.from_tools([restaurant_tool], llm=llm, verbose=True)
 
     # User interaction loop
@@ -42,9 +46,7 @@ def main():
 
         # Timing start for query processing
         start_time = time.time()
-
         result = agent.query(prompt)
-
         # Timing end for query processing
         end_time = time.time()
         query_processing_time = end_time - start_time
