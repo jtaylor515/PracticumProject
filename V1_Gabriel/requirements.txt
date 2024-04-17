@@ -1,4 +1,0 @@
-python-dotenv==0.20.0
-pandas==2.1.4
-llama-index==0.10.15
-openai==1.13.3

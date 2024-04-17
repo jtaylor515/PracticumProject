@@ -1,1 +1,0 @@
-query = "SELECT name, address, city, state, stars, review_count FROM raw_business LIMIT 10;"
