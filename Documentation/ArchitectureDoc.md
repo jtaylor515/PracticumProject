@@ -1,6 +1,6 @@
 ## Architecture Diagram
 
-![Architecture Diagram](architecture_diagram.pdf)
+![Architecture Diagram](MunchArchitectureDiagram.pdf)
 
 ## Flow Explanation
 
