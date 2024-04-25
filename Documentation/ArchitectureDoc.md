@@ -11,4 +11,4 @@ The architecture diagram illustrates the flow of our system:
 - **Component C**: Description of Component C and how it interacts with Components A and B.
 - Etc.
 
-[Download PDF](path/to/your/architecture_diagram.pdf)
+[Download PDF](MunchArchitectureDiagram.pdf)
