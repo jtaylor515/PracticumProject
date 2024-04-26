@@ -3,6 +3,7 @@
 Welcome to Munch - your go-to destination for smart, personalized restaurant recommendations! Whether you're gluten-free or just want to find the best burger in town, Munch will be your new foodie friend.
 
 Access Munch [here](http://3.88.178.155).
+Video Pitch [here](INSERT LINK).
 
 ## About Envitas
 
