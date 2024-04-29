@@ -4,7 +4,7 @@ Welcome to Munch - your go-to destination for smart, personalized restaurant rec
 
 Access Munch [here](http://3.88.178.155).
 
-Video Pitch [here](INSERT LINK).
+Video Pitch [here]((https://drive.google.com/file/d/1M8jlDOg7no48_49eLF2_h8a3PDLCg_Yu/view?usp=sharing)).
 
 ## About Envitas
 
