@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
 from .models import Note
+import random
 from . import db
 import json
 from flask import Flask
@@ -86,43 +87,45 @@ def search():
     )
 
     query_engine = SQLTableRetrieverQueryEngine(
-        sql_database, obj_index.as_retriever(similarity_top_k=1), llm=llm
+        sql_database, obj_index.as_retriever(similarity_top_k=10), llm=llm
     )
 
     search_query = request.json['query']
     print(request.json['query'])
 
     context_prompt = """
-    Recommend me 5 restaurants from our database as json objects in this exact format, make sure to always display these 5 fields too (id, name, review_count, stars, relevant_categories). Include a number of relevant categories you deem appropriate (try your best to include the ones mentioned on the user's query). Pick and order the results based on your best judgement, based on the relevant categories and the user's query. Only give me restaurants that you see on the databse.
+    Recommend me 5 restaurants from our database as json objects in this EXACT format bellow, make sure to always display these 5 fields too (id, name, review_count, stars, relevant_categories). Include a maximum of 8 of relevant categories you deem appropriate (try your best to include the ones mentioned on the user's query). Pick and order the results based on your best judgement, on the relevant categories and the user's query. Include the relevant categories exactly as their are listed on the database. ONLY include restaurants that are on the database. Reply only with the JSON.
     Example entry format (not to be included):
-    "recommendations": [
-        {
-            "id": "244",
-            "name": "The Iberian Pig",
-            "review_count": 184,
-            "stars": 4.5,
-            "relevant_categories": {
-                "Spanish": true,
-                "Food": 5.0,
-                "Pan con Tomates": 4.5
-            }
-        },
-        {
-            "id": "2585",
-            "name": "Buena Vida Tapas & Sol",
-            "review_count": 124,
-            "stars": 4.5,
-            "relevant_categories": {
-                "Tapas": true,
-                "outdoor seating": true,
-                "Service": 5.0,
-                "Desert": 4,
-                "House's Special Cuban Sandwich": 4.7
-            }
-        },
-        ...
-    ]
+    {
+        "recommendations": [
+            {
+                "id": "1mHwv5rp5aKqVcFtNTBVVQ",
+                "name": "The Iberian Pig",
+                "review_count": 184,
+                "stars": 4.5,
+                "relevant_categories": {
+                    "Spanish": true,
+                    "Food": 5.0,
+                    "Pan con Tomates": 4.8
+                }
+            },
+            {
+                "id": "FmHwv5rp5wKqVcFiNTAVVQ",
+                "name": "Buena Vida Tapas & Sol",
+                "review_count": 124,
+                "stars": 4.5,
+                "relevant_categories": {
+                    "Tapas": true,
+                    "outdoor seating": true,
+                    "Service": 5.0,
+                    "Desert": 3.2,
+                    "House's Special Cuban Sandwich": 4.6
+                }
+            },
+            ...
+        ]
     }
+    
     User's restaurant query:
     """
 
@@ -201,6 +204,29 @@ def search():
 
         print(restaurant_details)
 
+        # Fetch the best review based on highest stars and most useful votes
+        reviews = {}
+        for restaurant_id in restaurant_ids:
+            query = """
+            SELECT text, stars 
+            FROM new_raw_review 
+            WHERE business_id = %s 
+            ORDER BY CAST(stars AS INTEGER) DESC, CAST(useful AS INTEGER) DESC 
+            LIMIT 1
+            """
+            cur.execute(query, (restaurant_id,))
+            result = cur.fetchone()
+            if result:
+                reviews[restaurant_id] = {
+                    'text': result[0],
+                    'stars': result[1]
+                }
+            else:
+                reviews[restaurant_id] = {
+                    'text': 'No reviews available for this restaurant.',
+                    'stars': 'N/A'
+                }
+
         # Close the cursor and connection
         cur.close()
         conn.close()
@@ -212,6 +238,9 @@ def search():
             restaurant['city'] = restaurant_details[restaurant['id']]['city']
             restaurant['state'] = restaurant_details[restaurant['id']]['state']
             restaurant['hours'] = restaurant_details[restaurant['id']]['hours']
+            restaurant_id = restaurant['id']
+            restaurant['review'] = reviews[restaurant_id]['text']
+            restaurant['review_stars'] = reviews[restaurant_id]['stars']
 
         print(json_data)
         return jsonify(json_data)

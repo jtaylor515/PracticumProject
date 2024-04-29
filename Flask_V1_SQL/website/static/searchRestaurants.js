@@ -64,145 +64,162 @@ function renderRestaurantCards(data) {
   resultsContainer.innerHTML = ""; // Clear previous results
 
   data.recommendations.forEach((restaurant) => {
-    // Create card container
-    const card = document.createElement("div");
-    card.className = "restaurant-card";
+      // Create card container
+      const card = document.createElement("div");
+      card.className = "restaurant-card";
 
-    // Create and add image container
-    const imageDiv = document.createElement("div");
-    imageDiv.className = "card-image";
+      // Create and add image container
+      const imageDiv = document.createElement("div");
+      imageDiv.className = "card-image";
 
-    // Create image scroll container
-    const imageScrollContainer = document.createElement("div");
-    imageScrollContainer.className = "image-scroll-container";
+      // Create image scroll container
+      const imageScrollContainer = document.createElement("div");
+      imageScrollContainer.className = "image-scroll-container";
 
-    // Create image elements for each photo ID
-    restaurant.photo_ids.forEach((photoId, index) => {
-      const imageUrl = `https://s3-media4.fl.yelpcdn.com/bphoto/${photoId}/o.jpg`;
-      const imageElement = document.createElement("img");
-      imageElement.src = imageUrl;
-      imageElement.alt = `Restaurant Image ${index + 1}`;
-      if (index === 0) {
-        imageElement.classList.add("active");
+      // Create image elements for each photo ID
+      restaurant.photo_ids.forEach((photoId, index) => {
+          const imageUrl = `https://s3-media4.fl.yelpcdn.com/bphoto/${photoId}/o.jpg`;
+          const imageElement = document.createElement("img");
+          imageElement.src = imageUrl;
+          imageElement.alt = `Restaurant Image ${index + 1}`;
+          if (index === 0) {
+              imageElement.classList.add("active");
+          }
+          imageScrollContainer.appendChild(imageElement);
+      });
+
+      // Create scroll arrows
+      const leftArrow = document.createElement("div");
+      leftArrow.className = "scroll-arrow left-arrow";
+      leftArrow.textContent = "<";
+      leftArrow.style.userSelect = "none";  // Prevent text selection
+      leftArrow.style.cursor = "pointer";   // Suggest interactivity
+      const rightArrow = document.createElement("div");
+      rightArrow.className = "scroll-arrow right-arrow";
+      rightArrow.textContent = ">";
+      rightArrow.style.userSelect = "none";  // Prevent text selection
+      rightArrow.style.cursor = "pointer";   // Suggest interactivity
+
+      // Check and update arrow visibility
+      function updateArrows() {
+          const activeImage = imageScrollContainer.querySelector("img.active");
+          const isFirstImage = activeImage === imageScrollContainer.firstElementChild;
+          const isLastImage = activeImage === imageScrollContainer.lastElementChild;
+          leftArrow.style.display = isFirstImage ? "none" : "block";
+          rightArrow.style.display = isLastImage ? "none" : "block";
       }
-      imageScrollContainer.appendChild(imageElement);
-    });
 
-    // Create scroll arrows
-    const leftArrow = document.createElement("div");
-    leftArrow.className = "scroll-arrow left-arrow";
-    leftArrow.textContent = "<";
-    const rightArrow = document.createElement("div");
-    rightArrow.className = "scroll-arrow right-arrow";
-    rightArrow.textContent = ">";
+      // Initial arrow visibility check
+      updateArrows();
 
-    // Check and update arrow visibility
-    function updateArrows() {
-      const activeImage = imageScrollContainer.querySelector("img.active");
-      const isFirstImage =
-        activeImage === imageScrollContainer.firstElementChild;
-      const isLastImage = activeImage === imageScrollContainer.lastElementChild;
-      leftArrow.style.display = isFirstImage ? "none" : "block";
-      rightArrow.style.display = isLastImage ? "none" : "block";
-    }
+      // Add event listeners to scroll arrows with arrow visibility update
+      leftArrow.addEventListener("click", (event) => {
+          event.stopPropagation(); // Prevent event bubbling to the card
+          const currentImage = imageScrollContainer.querySelector("img.active");
+          const prevImage = currentImage.previousElementSibling;
+          if (prevImage) {
+              currentImage.classList.remove("active");
+              prevImage.classList.add("active");
+              updateArrows(); // Update arrows after changing image
+          }
+      });
+      rightArrow.addEventListener("click", (event) => {
+          event.stopPropagation(); // Prevent event bubbling to the card
+          const currentImage = imageScrollContainer.querySelector("img.active");
+          const nextImage = currentImage.nextElementSibling;
+          if (nextImage) {
+              currentImage.classList.remove("active");
+              nextImage.classList.add("active");
+              updateArrows(); // Update arrows after changing image
+          }
+      });
 
-    // Initial arrow visibility check
-    updateArrows();
-
-    // Add event listeners to scroll arrows with arrow visibility update
-    leftArrow.addEventListener("click", (event) => {
-      event.stopPropagation(); // Prevent event bubbling to the card
-      const currentImage = imageScrollContainer.querySelector("img.active");
-      const prevImage = currentImage.previousElementSibling;
-      if (prevImage) {
-        currentImage.classList.remove("active");
-        prevImage.classList.add("active");
-        updateArrows(); // Update arrows after changing image
+      // Append image scroll container and arrows to image container
+      imageDiv.appendChild(imageScrollContainer);
+      if (restaurant.photo_ids.length > 1) {
+          imageDiv.appendChild(leftArrow);
+          imageDiv.appendChild(rightArrow);
       }
-    });
-    rightArrow.addEventListener("click", (event) => {
-      event.stopPropagation(); // Prevent event bubbling to the card
-      const currentImage = imageScrollContainer.querySelector("img.active");
-      const nextImage = currentImage.nextElementSibling;
-      if (nextImage) {
-        currentImage.classList.remove("active");
-        nextImage.classList.add("active");
-        updateArrows(); // Update arrows after changing image
-      }
-    });
 
-    // Append image scroll container and arrows to image container
-    imageDiv.appendChild(imageScrollContainer);
-    if (restaurant.photo_ids.length > 1) {
-      imageDiv.appendChild(leftArrow);
-      imageDiv.appendChild(rightArrow);
-    }
+      card.appendChild(imageDiv);
 
-    card.appendChild(imageDiv);
+      // Create and add info container
+      const infoDiv = document.createElement("div");
+      infoDiv.className = "card-info";
 
-    // Create and add info container
-    const infoDiv = document.createElement("div");
-    infoDiv.className = "card-info";
+      // Add name
+      const nameElement = document.createElement("div");
+      nameElement.className = "name";
+      nameElement.textContent = restaurant.name;
+      infoDiv.appendChild(nameElement);
 
-    // Add name
-    const nameElement = document.createElement("div");
-    nameElement.className = "name";
-    nameElement.textContent = restaurant.name;
-    infoDiv.appendChild(nameElement);
+      // Create and add rating and review count container
+      const ratingReviewDiv = document.createElement("div");
+      ratingReviewDiv.className = "rating-review";
+      const ratingElement = document.createElement("div");
+      ratingElement.className = "rating";
+      ratingElement.textContent = `${restaurant.stars} stars`;
+      ratingReviewDiv.appendChild(ratingElement);
 
-    // Create and add rating and review count container
-    const ratingReviewDiv = document.createElement("div");
-    ratingReviewDiv.className = "rating-review";
-    const ratingElement = document.createElement("div");
-    ratingElement.className = "rating";
-    ratingElement.textContent = `Rating: ${restaurant.stars} stars`;
-    ratingReviewDiv.appendChild(ratingElement);
+      const reviewCountElement = document.createElement("div");
+      reviewCountElement.className = "review-count";
+      reviewCountElement.textContent = `${restaurant.review_count} reviews`;
+      ratingReviewDiv.appendChild(reviewCountElement);
 
-    const reviewCountElement = document.createElement("div");
-    reviewCountElement.className = "review-count";
-    reviewCountElement.textContent = `${restaurant.review_count} reviews`;
-    ratingReviewDiv.appendChild(reviewCountElement);
+      // Append rating and review container to info container
+      infoDiv.appendChild(ratingReviewDiv);
 
-    // Append rating and review container to info container
-    infoDiv.appendChild(ratingReviewDiv);
+      // Add categories with color-coded bubbles
+      const categoriesDiv = document.createElement("div");
+      categoriesDiv.className = "categories-container";
 
-    // Add categories with color-coded bubbles
-    const categoriesDiv = document.createElement("div");
-    categoriesDiv.className = "categories-container";
+      Object.keys(restaurant.relevant_categories).forEach(category => {
+          const categoryBubble = document.createElement("span");
+          categoryBubble.className = "category-bubble";
+          let categoryValue = restaurant.relevant_categories[category];
 
-    Object.keys(restaurant.relevant_categories).forEach(category => {
-      const categoryBubble = document.createElement("span");
-      categoryBubble.className = "category-bubble";
-      let categoryValue = restaurant.relevant_categories[category];
-    
-      if (typeof categoryValue === 'boolean') {
-        // If the category value is boolean, display only the category name
-        categoryBubble.textContent = category;
-        categoryBubble.style.backgroundColor = categoryValue ? '#E65A4D' : '#EDEDED';
-      } else if (categoryValue !== null) {
-        // If the category value is not null and not boolean, display name and value
-        categoryValue = categoryValue.toFixed(1); // Converts to string rounded to 1 decimal place
-        categoryBubble.textContent = `${category}: ${categoryValue}`;
-        categoryBubble.style.backgroundColor = getRatingColor(parseFloat(categoryValue));
-      } else {
-        // If the category value is null, display only the category name without a value
-        categoryBubble.textContent = category;
-        categoryBubble.style.backgroundColor = '#EDEDED';
-      }
-    
-      categoriesDiv.appendChild(categoryBubble);
-    });
-    infoDiv.appendChild(categoriesDiv);
+          // Adjust the styles for the category bubbles
+          categoryBubble.style.padding = "4px 8px"; // Smaller padding
+          categoryBubble.style.margin = "4px"; // Reduce margin for tighter layout
+          categoryBubble.style.fontSize = "17px"; // Smaller font size
+          categoryBubble.style.borderRadius = "10px"; // Adjust border radius for aesthetics
 
-    card.appendChild(infoDiv);
+      
+          if (typeof categoryValue === 'boolean') {
+              // If the category value is boolean, display only the category name
+              categoryBubble.innerHTML = `<strong>${category}</strong>`;
+              categoryBubble.style.backgroundColor = categoryValue ? '#E65A4D' : '#EDEDED';
+          } else if (categoryValue !== null) {
+              // If the category value is not null and not boolean, display name and value
+              categoryValue = categoryValue.toFixed(1); // Converts to string rounded to 1 decimal place
+              categoryBubble.innerHTML = `<strong>${category}: ${categoryValue}</strong>`;
+              categoryBubble.style.backgroundColor = getRatingColor(parseFloat(categoryValue));
+          } else {
+              // If the category value is null, display only the category name without a value
+              categoryBubble.innerHTML = `<strong>${category}</strong>`;
+              categoryBubble.style.backgroundColor = '#EDEDED';
+          }
+      
+          categoriesDiv.appendChild(categoryBubble);
+      });
+      infoDiv.appendChild(categoriesDiv);
 
-    // Append card to results container
-    resultsContainer.appendChild(card);
+      // Add review text and stars
+      const reviewText = truncateText(restaurant.review, 300); // Truncate review to 150 characters
+      const reviewElement = document.createElement("div");
+      reviewElement.className = "review";
+      reviewElement.innerHTML = `<strong>Featured Review:</strong> <em>"${reviewText}"</em>`;
+      infoDiv.appendChild(reviewElement);
 
-    // Add click event listener to card
-    card.addEventListener("click", () => {
-      openRestaurantPopup(restaurant);
-    });
+      card.appendChild(infoDiv);
+
+      // Append card to results container
+      resultsContainer.appendChild(card);
+
+      // Add click event listener to card
+      card.addEventListener("click", () => {
+        openRestaurantPopup(restaurant);
+      });
   });
 }
 
@@ -293,9 +310,13 @@ function openRestaurantPopup(restaurant) {
   const leftArrow = document.createElement("div");
   leftArrow.className = "scroll-arrow left-arrow";
   leftArrow.textContent = "<";
+  leftArrow.style.userSelect = "none";  // Prevent text selection
+  leftArrow.style.cursor = "pointer";   // Suggest interactivity
   const rightArrow = document.createElement("div");
   rightArrow.className = "scroll-arrow right-arrow";
   rightArrow.textContent = ">";
+  rightArrow.style.userSelect = "none";  // Prevent text selection
+  rightArrow.style.cursor = "pointer";   // Suggest interactivity
 
   // Check and update arrow visibility
   function updateArrows() {
@@ -357,7 +378,7 @@ function openRestaurantPopup(restaurant) {
   categoriesDiv.style.justifyContent = "center";
   categoriesDiv.style.marginBottom = "10px";
 
-  const maxBubbleSize = 60; // Maximum size for category bubbles
+  const maxBubbleSize = 95; // Maximum size for category bubbles
   const minBubbleSize = 30; // Minimum size for category bubbles
   const bubbleSize = Math.max(minBubbleSize, Math.min(maxBubbleSize, maxBubbleSize / Math.sqrt(Object.keys(restaurant.relevant_categories).length)));
 
@@ -365,21 +386,21 @@ function openRestaurantPopup(restaurant) {
     const categoryBubble = document.createElement("span");
     categoryBubble.className = "category-bubble";
     categoryBubble.style.margin = "4px";
-    categoryBubble.style.padding = "6px 12px";
-    categoryBubble.style.borderRadius = "20px";
+    categoryBubble.style.padding = "4px 8px"; // Smaller padding
+    categoryBubble.style.borderRadius = "10px";
     categoryBubble.style.fontSize = `${bubbleSize * 0.5}px`;
 
     let categoryValue = restaurant.relevant_categories[category];
 
     if (typeof categoryValue === 'boolean') {
-      categoryBubble.textContent = category;
+      categoryBubble.innerHTML = `<strong>${category}</strong>`;
       categoryBubble.style.backgroundColor = categoryValue ? '#E65A4D' : '#EDEDED';
     } else if (categoryValue !== null) {
       categoryValue = categoryValue.toFixed(1);
-      categoryBubble.textContent = `${category}: ${categoryValue}`;
+      categoryBubble.innerHTML = `<strong>${category}: ${categoryValue}</strong>`;
       categoryBubble.style.backgroundColor = getRatingColor(parseFloat(categoryValue));
     } else {
-      categoryBubble.textContent = category;
+      categoryBubble.innerHTML = `<strong>${category}</strong>`;
       categoryBubble.style.backgroundColor = '#EDEDED';
     }
 
@@ -413,7 +434,7 @@ function openRestaurantPopup(restaurant) {
   const locationButton = document.createElement("button");
   locationButton.textContent = "Directions";
   locationButton.onclick = function () {
-    const encodedAddress = encodeURIComponent(restaurant.address);
+    const encodedAddress = encodeURIComponent(`${restaurant.address}, ${restaurant.city}, ${restaurant.state}`);
     window.open(
       `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`,
       "_blank"
@@ -489,7 +510,7 @@ function openRestaurantPopup(restaurant) {
 
   // Create and add the rating element
   const ratingElement = document.createElement("div");
-  ratingElement.textContent = ` ${restaurant.stars} / 5`;
+  ratingElement.textContent = ` ${restaurant.review_stars} / 5`;
   ratingElement.style.marginBottom = "20px";
   ratingElement.style.fontSize = "30px";
   ratingElement.style.display = "flex";
@@ -503,13 +524,13 @@ function openRestaurantPopup(restaurant) {
   const reviewContainer = document.createElement("div");
   reviewContainer.style.width = "70%";
 
-  // Create and add the text review element
-  const textReviewElement = document.createElement("div");
-  textReviewElement.textContent = "This restaurant is fantastic! The atmosphere is welcoming, and the staff is friendly and attentive. The food quality is consistently high, and they have great Happy Hour deals. Their Spinach Chaat and Lamb Lollipops are must-tries!";
-  textReviewElement.style.marginBottom = "20px";
-  textReviewElement.style.fontSize = "16px";
-  textReviewElement.style.padding = "20px";
-  reviewContainer.appendChild(textReviewElement);
+  const reviewElement = document.createElement("div");
+  reviewElement.innerHTML = `<strong>Featured Review:</strong> <em>"${restaurant.review}"</em>`;
+  reviewElement.style.marginTop = "20px";
+  reviewElement.style.marginBottom = "20px";
+  reviewElement.style.fontSize = "16px";
+  reviewElement.style.padding = "20px";
+  reviewContainer.appendChild(reviewElement);
 
   // Add the review container to the main container
   container.appendChild(reviewContainer);
@@ -584,4 +605,11 @@ function formatTime(timeString) {
   const period = formattedHours >= 12 ? "PM" : "AM";
   const displayHours = formattedHours % 12 || 12;
   return `${displayHours}:${formattedMinutes} ${period}`;
+}
+
+function truncateText(text, maxLength) {
+  if (text.length > maxLength) {
+      return text.substring(0, maxLength - 3) + "...";
+  }
+  return text;
 }
