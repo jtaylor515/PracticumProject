@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='Munch.jpg') }}"
+      type="image/jpg"
+    />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -48,18 +53,16 @@
         <div class="menu full">
           <ul>
             <li><a id="home" href="/">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
+            <li>
+              <a
+                href="https://github.com/jtaylor515/PracticumProject"
+                target="_blank"
+                >About</a
+              >
+            </li>
             {% if not current_user.is_authenticated %}
             <li><a id="login" href="/login">Login</a></li>
             <li><a id="signUp" href="/sign-up">SignUp</a></li>
-            {% else %}
-            <li><a id="reservations" href="/reservations">Reservations</a></li>
-            <li>
-              <a id="RestaurantSearch" href="/restaurant-search"
-                >Restaurant Search</a
-              >
-            </li>
             {% endif %} {% if current_user.is_authenticated %}
             <li><a id="logout" href="/logout">Logout</a></li>
             {% endif %}
@@ -91,31 +94,28 @@
 
     <footer class="container">
       <div class="section-footer maxsize">
-        <div class="office js-scroll fade-in-up">
-          <div class="logo">LOGO</div>
+        <div class="office">
+          <div class="logo">
+            <img
+              src="{{ url_for('static', filename='images/munch.jpg') }}"
+              alt="Munch Logo"
+              class="my-logo-class"
+            />
+          </div>
         </div>
-        <div class="quick footerlinks js-scroll fade-in-up">
+        <div class="quick footerlinks">
           <h4>Quick Links</h4>
-          <li><a href="#">Company</a></li>
-          <li><a href="#">Features</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Blog</a></li>
+          <li><a href="/">Home</a></li>
         </div>
-        <div class="social footerlinks js-scroll fade-in-up">
+        <div class="social footerlinks">
           <h4>Social</h4>
-
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">Twitter</a></li>
-          <li><a href="#">Youtube</a></li>
-        </div>
-        <div class="template footerlinks js-scroll fade-in-up">
-          <h4>Template</h4>
-
-          <li><a href="#">Instructions</a></li>
-          <li><a href="#">Licensing</a></li>
-          <li><a href="#">Style Guide</a></li>
-          <li><a href="#">Changelog</a></li>
+          <li>
+            <a
+              href="https://github.com/jtaylor515/PracticumProject"
+              target="_blank"
+              >Github</a
+            >
+          </li>
         </div>
       </div>
     </footer>

@@ -47,11 +47,11 @@ def search():
     engine = create_engine(db_url)
 
     # Define the table name
-    table_name = "raw_business"
+    table_name = "new_raw_business"
 
     # Manually create the table schema
     table_schema_obj = SQLTableSchema(
-        table_name="raw_business",
+        table_name="new_raw_business",
         columns=[
             {"name": "business_id", "type": "varchar"},
             {"name": "name", "type": "varchar"},
@@ -93,19 +93,32 @@ def search():
     print(request.json['query'])
 
     context_prompt = """
-    Recommend me 5 restaurants as json objects in this exact format, in your sql query, make sure to always display these 4 fields too (id, name, review_count, stars) Always order the results on the SQL table by review_count.
+    Recommend me 5 restaurants from our database as json objects in this exact format, make sure to always display these 5 fields too (id, name, review_count, stars, relevant_categories). Include a number of relevant categories you deem appropriate (try your best to include the ones mentioned on the user's query). Pick and order the results based on your best judgement, based on the relevant categories and the user's query. Only give me restaurants that you see on the databse.
+    Example entry format (not to be included):
     "recommendations": [
         {
             "id": "244",
             "name": "The Iberian Pig",
             "review_count": 184,
-            "stars": 4.5
+            "stars": 4.5,
+            "relevant_categories": {
+                "Spanish": true,
+                "Food": 5.0,
+                "Pan con Tomates": 4.5
+            }
         },
         {
             "id": "2585",
             "name": "Buena Vida Tapas & Sol",
             "review_count": 124,
-            "stars": 4.5
+            "stars": 4.5,
+            "relevant_categories": {
+                "Tapas": true,
+                "outdoor seating": true,
+                "Service": 5.0,
+                "Desert": 4,
+                "House's Special Cuban Sandwich": 4.7
+            }
         },
         ...
     ]
@@ -115,6 +128,7 @@ def search():
 
     response = query_engine.query(context_prompt + search_query)
     print(response)
+
 
     try:
         json_data = json.loads(str(response))
@@ -140,22 +154,122 @@ def search():
         # Fetch photo IDs for each restaurant ID
         photo_ids = {}
         for restaurant_id in restaurant_ids:
+            # Fetch photo IDs from new_photos table
             query = "SELECT photo_id FROM new_photos WHERE business_id = %s"
             cur.execute(query, (restaurant_id,))
-            results = cur.fetchall()
-            photo_ids[restaurant_id] = [result[0] for result in results]
+            new_photo_results = cur.fetchall()
+
+            # Start with photo IDs from new_photos
+            photo_list = [result[0] for result in new_photo_results]
+            unique_photo_ids = set(photo_list)  # Use a set to track what we've seen
+
+            # Fetch photo IDs from raw_photos table
+            query = "SELECT photo_id FROM raw_photos WHERE business_id = %s"
+            cur.execute(query, (restaurant_id,))
+            raw_photo_results = cur.fetchall()
+
+            # Append only new unique photo IDs from raw_photos
+            for result in raw_photo_results:
+                if result[0] not in unique_photo_ids:
+                    photo_list.append(result[0])
+                    unique_photo_ids.add(result[0])
+
+            photo_ids[restaurant_id] = photo_list
 
         print(photo_ids)
+
+        # Fetch restaurant details from the new_raw_business table
+        restaurant_details = {}
+        for restaurant_id in restaurant_ids:
+            query = "SELECT address, city, state, hours FROM new_raw_business WHERE business_id = %s"
+            cur.execute(query, (restaurant_id,))
+            result = cur.fetchone()
+            if result:
+                restaurant_details[restaurant_id] = {
+                    'address': result[0],
+                    'city': result[1],
+                    'state': result[2],
+                    'hours': result[3]
+                }
+            else:
+                restaurant_details[restaurant_id] = {
+                    'address': '',
+                    'city': '',
+                    'state': '',
+                    'hours': {}
+                }
+
+        print(restaurant_details)
+
+       # Set up the second Llama Index agent for review retrieval
+        review_table_name = "new_raw_review"
+
+        review_table_schema_obj = SQLTableSchema(
+            table_name=review_table_name,
+            columns=[
+                {"name": "review_id", "type": "varchar"},
+                {"name": "user_id", "type": "varchar"},
+                {"name": "business_id", "type": "varchar"},
+                {"name": "stars", "type": "varchar"},
+                {"name": "useful", "type": "varchar"},
+                {"name": "funny", "type": "varchar"},
+                {"name": "cool", "type": "varchar"},
+                {"name": "text", "type": "text"},
+                {"name": "date", "type": "varchar"},
+            ],
+        )
+
+        review_sql_database = SQLDatabase(engine=engine, schema='yelp', include_tables=[review_table_name])
+
+        review_table_node_mapping = SQLTableNodeMapping(review_sql_database)
+
+        review_obj_index = ObjectIndex.from_objects(
+            [review_table_schema_obj],
+            review_table_node_mapping,
+            VectorStoreIndex,
+        )
+
+        review_query_engine = SQLTableRetrieverQueryEngine(
+            review_sql_database, review_obj_index.as_retriever(similarity_top_k=1), llm=llm
+        )
+
+        # Retrieve relevant reviews for each restaurant
+        for restaurant in json_data['recommendations']:
+            restaurant_id = restaurant['id']
+
+            review_context_prompt = f"""
+            Based on the user's query: "{search_query}", find the most relevant review for the restaurant with ID: {restaurant_id}. 
+            Return the review along with a brief explanation of why it is relevant to the user's query and the restaurant's relevant categories.
+            Format the response as a JSON object with the following fields:
+            - business_id: The ID of the restaurant
+            - review_id: The ID of the selected review
+            - review_text: The full text of the selected review
+            - explanation: A brief explanation of why the review is relevant to the user's query and the restaurant's categories
+            """
+
+            review_response = review_query_engine.query(review_context_prompt)
+            print(review_response)
+
+            try:
+                review_json = json.loads(str(review_response))
+                restaurant['selected_review'] = review_json
+            except json.JSONDecodeError:
+                restaurant['selected_review'] = None
 
         # Close the cursor and connection
         cur.close()
         conn.close()
 
-        # Add the photo IDs to the JSON response
+        # Add the photo IDs, addresses, and hours to the JSON response
         for i, restaurant in enumerate(json_data['recommendations']):
             restaurant['photo_ids'] = photo_ids[restaurant['id']]
+            restaurant['address'] = restaurant_details[restaurant['id']]['address']
+            restaurant['city'] = restaurant_details[restaurant['id']]['city']
+            restaurant['state'] = restaurant_details[restaurant['id']]['state']
+            restaurant['hours'] = restaurant_details[restaurant['id']]['hours']
 
         print(json_data)
         return jsonify(json_data)
+
     except json.JSONDecodeError:
         return jsonify({"error": "Invalid JSON response"}), 400
