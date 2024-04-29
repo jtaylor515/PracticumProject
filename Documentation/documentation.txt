@@ -1,6 +1,0 @@
-Data
-https://www.yelp.com/dataset/documentation/main
-
-Data Pipeline
-Download JSON Data --> Convert JSON to CSV --> Copy to postgreSQL AWS RDS --> Query direct to RDS
-
