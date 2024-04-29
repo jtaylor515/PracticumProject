@@ -201,61 +201,6 @@ def search():
 
         print(restaurant_details)
 
-       # Set up the second Llama Index agent for review retrieval
-        review_table_name = "new_raw_review"
-
-        review_table_schema_obj = SQLTableSchema(
-            table_name=review_table_name,
-            columns=[
-                {"name": "review_id", "type": "varchar"},
-                {"name": "user_id", "type": "varchar"},
-                {"name": "business_id", "type": "varchar"},
-                {"name": "stars", "type": "varchar"},
-                {"name": "useful", "type": "varchar"},
-                {"name": "funny", "type": "varchar"},
-                {"name": "cool", "type": "varchar"},
-                {"name": "text", "type": "text"},
-                {"name": "date", "type": "varchar"},
-            ],
-        )
-
-        review_sql_database = SQLDatabase(engine=engine, schema='yelp', include_tables=[review_table_name])
-
-        review_table_node_mapping = SQLTableNodeMapping(review_sql_database)
-
-        review_obj_index = ObjectIndex.from_objects(
-            [review_table_schema_obj],
-            review_table_node_mapping,
-            VectorStoreIndex,
-        )
-
-        review_query_engine = SQLTableRetrieverQueryEngine(
-            review_sql_database, review_obj_index.as_retriever(similarity_top_k=1), llm=llm
-        )
-
-        # Retrieve relevant reviews for each restaurant
-        for restaurant in json_data['recommendations']:
-            restaurant_id = restaurant['id']
-
-            review_context_prompt = f"""
-            Based on the user's query: "{search_query}", find the most relevant review for the restaurant with ID: {restaurant_id}. 
-            Return the review along with a brief explanation of why it is relevant to the user's query and the restaurant's relevant categories.
-            Format the response as a JSON object with the following fields:
-            - business_id: The ID of the restaurant
-            - review_id: The ID of the selected review
-            - review_text: The full text of the selected review
-            - explanation: A brief explanation of why the review is relevant to the user's query and the restaurant's categories
-            """
-
-            review_response = review_query_engine.query(review_context_prompt)
-            print(review_response)
-
-            try:
-                review_json = json.loads(str(review_response))
-                restaurant['selected_review'] = review_json
-            except json.JSONDecodeError:
-                restaurant['selected_review'] = None
-
         # Close the cursor and connection
         cur.close()
         conn.close()

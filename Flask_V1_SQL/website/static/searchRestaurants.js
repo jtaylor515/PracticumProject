@@ -194,14 +194,6 @@ function renderRestaurantCards(data) {
     });
     infoDiv.appendChild(categoriesDiv);
 
-    // Add LLM's explanation
-    if (restaurant.selected_review) {
-      const explanationElement = document.createElement("div");
-      explanationElement.className = "explanation";
-      explanationElement.textContent = restaurant.selected_review.explanation;
-      infoDiv.appendChild(explanationElement);
-    }
-
     card.appendChild(infoDiv);
 
     // Append card to results container
@@ -511,22 +503,13 @@ function openRestaurantPopup(restaurant) {
   const reviewContainer = document.createElement("div");
   reviewContainer.style.width = "70%";
 
-  // Create and add the selected review element
-  if (restaurant.selected_review) {
-    const selectedReviewElement = document.createElement("div");
-    selectedReviewElement.textContent = restaurant.selected_review.review_text;
-    selectedReviewElement.style.marginBottom = "20px";
-    selectedReviewElement.style.fontSize = "16px";
-    selectedReviewElement.style.padding = "20px";
-    reviewContainer.appendChild(selectedReviewElement);
-  } else {
-    const noReviewElement = document.createElement("div");
-    noReviewElement.textContent = "No relevant review found.";
-    noReviewElement.style.marginBottom = "20px";
-    noReviewElement.style.fontSize = "16px";
-    noReviewElement.style.padding = "20px";
-    reviewContainer.appendChild(noReviewElement);
-  }
+  // Create and add the text review element
+  const textReviewElement = document.createElement("div");
+  textReviewElement.textContent = "This restaurant is fantastic! The atmosphere is welcoming, and the staff is friendly and attentive. The food quality is consistently high, and they have great Happy Hour deals. Their Spinach Chaat and Lamb Lollipops are must-tries!";
+  textReviewElement.style.marginBottom = "20px";
+  textReviewElement.style.fontSize = "16px";
+  textReviewElement.style.padding = "20px";
+  reviewContainer.appendChild(textReviewElement);
 
   // Add the review container to the main container
   container.appendChild(reviewContainer);
