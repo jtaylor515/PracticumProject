@@ -26,6 +26,10 @@ Munch is a revolutionary web app that will make searching for a bite to eat easy
 - **Advice based on relevant reviews**: Munch will do the hard work so you don't have to. Answers are powered by real reviews! Munch filters out the noise, so you can trust you're getting good information.
 - **Transparent information**: Ultimately, you still have a decision ahead, so Munch will provide users with overall ratings, location, and all other available restaurant characteristics.  
 
+<p align="center">
+<img src="https://github.com/jtaylor515/PracticumProject/blob/main/Presentations/munch%20site.png" width="750" height="553" alt="Munch homepage" />
+</p>
+
 ## Getting Started
 
 To get started with Munch, simply access our website above and create an account. Once logged in, you'll have access to all of our AI helper and all the restaurant data we have available.
