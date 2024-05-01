@@ -1,5 +1,4 @@
 {% extends "base.html" %} {% block head %}
-<!-- Adjust the path above according to where you place the searchRestaurants.js file -->
 {% endblock %} {% block title %}Home Page{% endblock %} {% block content %}
 <div class="d-flex flex-column align-items-center mt-5">
   <section class="section-hero container">
@@ -9,41 +8,46 @@
           Find the best restaurant <span class="diff-bold">for you.</span>
         </h1>
         <p>Stop scrolling through reviews. Use Munch instead.</p>
-        <div class="search-container">
-          <input
-            id="search-input"
-            class="search-bar"
-            type="text"
-            placeholder="Ask about restaurants."
-          />
-          <button
-            id="search-button"
-            class="search-btn"
-            onclick="searchRestaurants()"
-          >
-            Search
-          </button>
-        </div>
+        <form
+          id="search-form"
+          onsubmit="event.preventDefault(); searchRestaurants();"
+        >
+          <div class="search-container">
+            <input
+              id="search-input"
+              class="search-bar"
+              type="text"
+              placeholder="Ask about restaurants."
+            />
+            <button
+              id="search-button"
+              class="search-btn"
+              onclick="searchRestaurants()"
+            >
+              Search
+            </button>
+          </div>
+        </form>
       </div>
-      <div id="results-container" class="results"></div>
       <div class="loading-spinner" style="display: none">
         <div class="spinner"></div>
       </div>
+      <div id="results-container" class="results"></div>
       <br />
       <div class="prompts">
         <div class="prompt-container">
           <p>
-            I want to find a Mexican restaurant with the best margaritas in
-            Atlanta
+          <strong>Find me the best gluten-free pizza in Philadelphia. I'm craving a slice.</strong>
           </p>
         </div>
         <div class="prompt-container">
-          <p>Where's a tasty burger spot with good vegetarian options?</p>
+          <p>
+            <strong>What are the best sushi restaurants in Philadelphia right now? I wanna go there with my date.</strong>
+          </p>
         </div>
         <div class="prompt-container">
           <p>
-            I need to impress a date. Can you find some romantic Italian or
-            French restaurants?
+            <strong>I am craving some duck right now. Do something about it immediately.</strong>
           </p>
         </div>
       </div>

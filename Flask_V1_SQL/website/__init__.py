@@ -2,20 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
-import time
-from dotenv import load_dotenv
-import os
-from llama_index.core.indices.struct_store.sql_query import SQLTableRetrieverQueryEngine
-from llama_index.core.objects import SQLTableNodeMapping, ObjectIndex, SQLTableSchema
-from llama_index.core import VectorStoreIndex, SQLDatabase
-from llama_index.llms.openai import OpenAI
-from sqlalchemy import create_engine, text, inspect
-try:
-    import psycopg2
-except ImportError:
-    import subprocess
-    subprocess.run(["pip", "install", "psycopg2-binary"])
-    import psycopg2
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -32,7 +18,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    from .models import User, Note
+    from .models import User
     
     with app.app_context():
         db.create_all()

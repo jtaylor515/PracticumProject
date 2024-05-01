@@ -4,16 +4,199 @@
     box-sizing: border-box;
 }
 
+.category-bubble {
+    font-family: 'DM Sans', sans-serif;
+    display: inline-block;
+    padding: 5px 15px;
+    margin: 5px;
+    border-radius: 15px; /* Pill shape */
+    color: black;
+    font-size: 14px;
+    text-align: center;
+    white-space: nowrap;
+    font-size: var(--pfont);
+    line-height: 1.5;
+  }
+  
+  .green-bubble {
+    background-color: #4CAF50; /* Green */
+  }
+  
+  .red-bubble {
+    background-color: #f44336; /* Red */
+  }
+  
+  .orange-bubble {
+    background-color: #FF6F61; /* Orange */
+  }
+  
+  .categories-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start; /* Align bubbles to the left */
+    margin: 10px 0; /* Spacing above and below the container */
+  }
+
+.no-results-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    z-index: 9999;
+  }
+  
+  .no-results-popup p {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 18px;
+  }
+  
+  .no-results-popup button {
+    background-color: #FF6F61;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+/* MIKE CSS */
+/* MIKE CSS */
+/* MIKE CSS */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  
+  /* Modal content */
+  .modal-content {
+    background-color: var(--bgdiff);
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    height: 50%;
+    overflow: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    text-align: left; /* Center align all text */
+    border: 3px solid var(--bgdiff);
+    border-radius: 10px;
+    color: black;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add a drop shadow */
+    
+  }
+  
+  /* Restaurant name */
+  .modal-content h2 {
+    text-decoration: underline;
+  }
+  
+
+    .btn-group-justified > .btn-group .btn {
+        width: 100%;
+        outline: none;
+    }
+  
+  @keyframes rainbow {
+    0% {
+      background-position: 0 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  .light-orange {
+     background-color: var(--bgdiff);
+  }
+  
+  
+  
+  .rating-circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #4caf50;
+      color: white;
+      font-weight: bold;
+  }
+  
+  .rating-container {
+      width: 100%;
+      height: 30px;
+      background-color: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+  }
+  
+  .rating-container span {
+      position: absolute;
+      color: black;
+  }
+  
+  .rating-bar {
+      height: 100%;
+      background-color: #4caf50;
+  }
+  
+  
+  #search-form {
+      width: 100%;
+  }
+  
+  .my-logo-class {
+      width: 100px;
+      height: auto;
+      display: block;
+  }
+
+
+
+/* MIKE CSS */
+/* MIKE CSS */
+/* MIKE CSS */
+
+
 /* Base style for the restaurant card */
 .restaurant-card {
-    display: flex; /* Use flexbox for layout */
+    display: flex;
     align-items: flex-start; /* Align items to the top */
-    background-color: #fff;
+    background-color: #fde6d6;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px; /* Space between cards */
     overflow: hidden;
 }
+.restaurant-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    transition: box-shadow 0.3s, transform 0.3s;
+    cursor: pointer;
+
+  }
 
 
 .card-image {
@@ -23,7 +206,7 @@
     height: 300px;
     overflow: hidden;
     border: 1px solid #ddd; /* subtle border */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* soft shadow for depth */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* soft shadow */
     margin-right: 20px; /* space between image and card content */
 }
 
@@ -91,7 +274,7 @@
 .rating-review {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px; /* Add space above this section */
+    margin-top: 10px; /* Add space above the section */
 }
 
 .rating {
@@ -104,13 +287,6 @@
     color: #888;
 }
 
-
-
-
-  
-/* Add these styles to your CSS file */
-
-
 .search-container {
     display: flex;
     justify-content: center;
@@ -120,60 +296,54 @@
   .search-bar {
     padding: 10px;
     border: none;
-    width: calc(100% - 120px); /* Take the width minus the button width */
-    border-radius: 20px 0 0 20px; /* Rounded corners on the left side */
+    width: calc(100% - 120px);
+    border-radius: 20px 0 0 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
   
   .search-btn {
     padding: 10px 20px;
-    background-color: #FF6F61; /* Aesthetic peach color */
+    background-color: #FF6F61;
     border: none;
     color: white;
     cursor: pointer;
-    border-radius: 0 20px 20px 0; /* Rounded corners on the right side */
+    border-radius: 0 20px 20px 0;
     transition: background-color 0.3s ease;
-    width: 100px; /* Fixed width for the button */
+    width: 100px; 
   }
   
   .search-btn:hover {
-    background-color: #e65a50; /* Darken the color on hover */
+    background-color: #e65a50;
   }
   
   .results {
     width: 100%;
     margin-top: 20px;
     padding: 20px;
-    /* ...other styles... */
 
   
-  /* To ensure the search bar expands downwards for large text */
   .search-bar {
     overflow: hidden;
     resize: vertical;
-    min-height: 38px; /* Minimum height to match the button */
+    min-height: 38px;
   }
   
   .diff-bold {
-    color: #FF6F61; /* Same peach color for consistency */
-    /* ...other styles... */
+    color: #FF6F61;
   }
 
-  /* Position the search bar and button side by side */
 .search-container {
     display: flex;
   }
   
-  /* Style the search bar */
   #search-input {
-    flex-grow: 1; /* Makes the search bar take up the available space */
-    margin-right: 8px; /* Adds spacing between the search bar and the button */
-    border-radius: 4px 0 0 4px; /* Rounded corners on the left side only */
+    flex-grow: 1;
+    margin-right: 8px;
+    border-radius: 4px 0 0 4px;
   }
   
-  /* Style the search button */
   #search-button {
-    border-radius: 0 4px 4px 0; /* Rounded corners on the right side only */
+    border-radius: 0 4px 4px 0;
   }
   
   
@@ -196,14 +366,14 @@ body{
 }
 
 .loading-spinner {
-    display: none; /* Keep the display none to control via JS */
-    width: 100%; /* Ensures it takes the full width */
-    text-align: center; /* Center the spinner horizontally */
-    margin-top: 20px; /* Add some top margin for spacing */
+    display: none;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
   }
   
   .loading-spinner .spinner {
-    display: inline-block; /* Display the spinner as an inline-block element */
+    display: inline-block;
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -221,6 +391,7 @@ body{
     }
   }
 
+  
 /* -----------value---------------- */
 
 :root{
@@ -467,25 +638,41 @@ input::placeholder {
 }
 
 /* ----------prompts------------------ */
-.prompts{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    grid-column-gap: 2rem;
-}
-
-.prompt-container{
+.prompts {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .prompt-container {
     background-color: var(--bgdiff);
     border-radius: 24px;
-    padding: 30px 30px 35px;
-    height: 14.25rem;
-    width: 20.25rem;
+    padding: 30px;
     display: flex;
     align-items: center;
     flex-flow: column nowrap;
     margin-bottom: 2rem;
     z-index: 100;
-}
+    cursor: pointer;
+    transition: box-shadow 0.3s, transform 0.3s;
+    font-family: 'DM Sans', sans-serif;
+    width: calc(33.33% - 20px); /* Adjust the width to fit the text */
+    height: auto; /* Remove fixed height */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  }
+  
+  .prompt-container:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+  }
+  
+  .prompt-container p {
+    font-size: var(--pfont);
+    line-height: 1.5;
+    color: var(--black1);
+    text-align: center;
+    margin: 0; /* Remove default margins */
+  }
 
 /* ----------scrolling animation view------------------ */
 
