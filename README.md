@@ -13,7 +13,7 @@ Envitas is a dynamic project group passionate about bringing innovation to the f
 - Jeffrey Taylor
 - Topher Roebuck
 - Cholyeon Cho
-- Gabriel Munhoz
+- Gabriel Mendonca
 - Mike Yu
 
 ## Elevator Pitch
