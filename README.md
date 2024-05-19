@@ -18,13 +18,22 @@ Envitas is a dynamic project group passionate about bringing innovation to the f
 
 ## Elevator Pitch
 
-Munch is a revolutionary web app that will make searching for a bite to eat easy and enjoyable. With the help of our LLM-powered AI chatbot, you won't have to endlessly scroll through reviews, websites, or the musings of local guides to find the perfect restaurant that fits your needs. Simply tell Munch what you're looking for, and it will provide relevant options near you with a friendly, conversational tone as well as links to make reservations. Munch will save you from stress and hassle, so you can focus on what matters most: good food and good times.
+Munch is an innovative AI-driven project that revolutionizes the way users find and evaluate restaurants using advanced natural language processing techniques. With Munch, users can search for restaurants using detailed, conversational queries, and our AI system intelligently filters and ranks the results to provide the most relevant recommendations.
 
-## Features
+## Key Features
 
-- **Interactive AI Chatbot**: Get personalized assistance in your search for a meal with our LLM-powered chatbot and restaurant ranking system
-- **Advice based on relevant reviews**: Munch will do the hard work so you don't have to. Answers are powered by real reviews! Munch filters out the noise, so you can trust you're getting good information.
-- **Transparent information**: Ultimately, you still have a decision ahead, so Munch will provide users with overall ratings, location, and all other available restaurant characteristics.  
+- **Natural Language Search**: Find restaurants with ease using intuitive, conversational queries.
+- **Detailed Review Analysis**: Our AI has analyzed over 40,000 Yelp reviews from 4,400+ restaurants, scoring each review on key features like food quality, ambiance, and service to provide comprehensive evaluations. 
+- **Aggregated Feature Scores**: Review scores are combined to give you detailed ratings for 14,000+ unique restaurant features identified by our AI, offering nuanced insights beyond simplistic star ratings.
+- **Semantic Similarity Matching**: Advanced text-to-SQL retrieval finds the most relevant restaurants based on the semantic meaning of your search.
+- **Informative Restaurant Cards**: Easily view top recommendations, with overall ratings, location, and other key details presented in a user-friendly format.
+
+## How it Works
+
+- Users input their restaurant search query in natural language on the Munch website.
+- Our AI system analyzes the query and uses text-to-SQL techniques to retrieve the most relevant restaurants from our database based on semantic similarity.
+- The retrieved restaurants are ranked and displayed to the user as restaurant cards, showcasing the overall ratings, location, and other important details.
+- Users can explore the restaurant cards to gain insights into the specific features and ratings of each restaurant, helping them make informed decisions about where to dine.
 
 <p align="center">
 <img src="https://github.com/jtaylor515/PracticumProject/blob/main/Presentations/munch%20site.png" width="750" height="553" alt="Munch homepage" />
