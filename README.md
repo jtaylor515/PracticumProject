@@ -36,7 +36,7 @@ Munch is an innovative AI-driven project that revolutionizes the way users find 
 - Users can explore the restaurant cards to gain insights into the specific features and ratings of each restaurant, helping them make informed decisions about where to dine.
 
 <p align="center">
-<img src="https://github.com/jtaylor515/PracticumProject/blob/main/Presentations/Munch_Results.jpg" width="750" height="553" alt="Munch homepage" />
+<img src="https://github.com/jtaylor515/PracticumProject/blob/main/Presentations/Munch_Results.png" width="750" height="553" alt="Munch homepage" />
 </p>
 
 ## Getting Started
