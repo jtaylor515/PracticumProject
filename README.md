@@ -28,6 +28,20 @@ Munch is an innovative AI-driven project that revolutionizes the way users find 
 - **Semantic Similarity Matching**: Advanced text-to-SQL retrieval finds the most relevant restaurants based on the semantic meaning of your search.
 - **Informative Restaurant Cards**: Easily view top recommendations, with overall ratings, location, and other key details presented in a user-friendly format.
 
+## Technologies Used
+
+Munch AI leverages a variety of cutting-edge technologies to deliver its advanced features and functionality:
+
+- **AI Frameworks & Libraries**: LlamaIndex, GPT-3.5 Turbo API
+- **Backend**: Flask, Python
+- **Frontend**: HTML, CSS, JavaScript
+- **Databases**: PostgreSQL
+- **Deployment**: AWS (EC2, VPC)
+- **Version Control**: Git, GitHub
+- **Containerization**: Docker
+- **Natural Language Processing (NLP)**: Retrieval Augmented Generation (RAG), Sentiment Analysis, Text-to-SQL
+- **Data Processing**: Pandas, NumPy
+
 ## How it Works
 
 - Users input their restaurant search query in natural language on the Munch website.
