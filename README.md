@@ -57,6 +57,10 @@ Munch AI leverages a variety of cutting-edge technologies to deliver its advance
 <img src="https://github.com/jtaylor515/PracticumProject/blob/main/Presentations/Munch_Detailed.png" width="750" height="553" alt="Munch homepage" />
 </p>
 
+<p align="center">
+<img src="https://github.com/jtaylor515/PracticumProject/blob/main/Presentations/system.jpg" width="750" height="553" alt="Munch homepage" />
+</p>
+
 ## Getting Started
 
 To get started with Munch, simply access our website above and create an account. Once logged in, you'll have access to all of our AI helper and all the restaurant data we have available.
