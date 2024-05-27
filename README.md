@@ -20,6 +20,10 @@ Envitas is a dynamic project group passionate about bringing innovation to the f
 
 Munch is an innovative AI-driven project that revolutionizes the way users find and evaluate restaurants using advanced natural language processing techniques. With Munch, users can search for restaurants using detailed, conversational queries, and our AI system intelligently filters and ranks the results to provide the most relevant recommendations.
 
+<p align="center">
+<img src="https://github.com/jtaylor515/PracticumProject/blob/main/Presentations/Restaurant_Results2.png" width="750" height="553" alt="Munch homepage" />
+</p>
+
 ## Key Features
 
 - **Natural Language Search**: Find restaurants with ease using intuitive, conversational queries.
@@ -42,6 +46,10 @@ Munch AI leverages a variety of cutting-edge technologies to deliver its advance
 - **Natural Language Processing (NLP)**: Retrieval Augmented Generation (RAG), Sentiment Analysis, Text-to-SQL
 - **Data Processing**: Pandas, NumPy
 
+<p align="center">
+<img src="https://github.com/jtaylor515/PracticumProject/blob/main/Presentations/system.jpg" width="750" height="553" alt="Munch homepage" />
+</p>
+
 ## How it Works
 
 - Users input their restaurant search query in natural language on the Munch website.
@@ -50,15 +58,7 @@ Munch AI leverages a variety of cutting-edge technologies to deliver its advance
 - Users can explore the restaurant cards to gain insights into the specific features and ratings of each restaurant, helping them make informed decisions about where to dine.
 
 <p align="center">
-<img src="https://github.com/jtaylor515/PracticumProject/blob/main/Presentations/Restaurant_Results2.png" width="750" height="553" alt="Munch homepage" />
-</p>
-
-<p align="center">
 <img src="https://github.com/jtaylor515/PracticumProject/blob/main/Presentations/Munch_Detailed.png" width="750" height="553" alt="Munch homepage" />
-</p>
-
-<p align="center">
-<img src="https://github.com/jtaylor515/PracticumProject/blob/main/Presentations/system.jpg" width="750" height="553" alt="Munch homepage" />
 </p>
 
 ## Getting Started
